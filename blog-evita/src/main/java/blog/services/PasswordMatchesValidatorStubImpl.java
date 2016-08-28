@@ -2,7 +2,11 @@ package blog.services;
 
 import java.util.Objects;
 
-public class PasswordMatchesValidatorStubImp implements PasswordMatchesValidator{
+import org.springframework.stereotype.Service;
+
+@Service
+public class PasswordMatchesValidatorStubImpl implements PasswordMatchesValidator{
+
 	@Override
 	public boolean authenticate(String password, String repeatPassword) {
 		
