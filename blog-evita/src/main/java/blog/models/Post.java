@@ -24,6 +24,7 @@ public class Post {
 	private User author;
 	
 	@Column(nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new Date();
 	
 	public Long getId() {
