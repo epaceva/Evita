@@ -12,8 +12,6 @@ public interface UserService {
 	void deleteById(Long id);
 	
 	boolean authenticate(String username, String password);
-	User login(String username, String password);
-	User register(String username, String password, String fullName);
-	void setPassword(String username, String newPassword);
+	User findByUsername(String username);
 	
 }

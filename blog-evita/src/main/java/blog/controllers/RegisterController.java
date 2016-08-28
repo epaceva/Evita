@@ -10,17 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import blog.forms.LoginForm;
 import blog.forms.RegisterForm;
+import blog.models.User;
 import blog.services.DuplicateUser;
 import blog.services.LoginService;
 import blog.services.NotificationService;
 import blog.services.PasswordMatchesValidator;
 import blog.services.RegisterService;
+import blog.services.UserService;
 
 @Controller
 public class RegisterController {
 	
 	@Autowired
-	private RegisterService registerService;
+	private UserService userService;
 	
 	@Autowired
 	private NotificationService notifyService;
@@ -44,10 +46,16 @@ public class RegisterController {
 			return "users/register";
 		}
 		
-		//if(duplicateUser.authenticate(loginForm.getUsername(),registerForm.getUsername())) {
-		//	notifyService.addErrorMessage("User already exist");
-		//	return "users/register";
-		//}
+		if (null != userService.findByUsername(registerForm.getUsername())) {
+			notifyService.addErrorMessage("User already exist");
+			return "users/register";
+		}
+		
+		User user = new User();
+		user.setId(0L);
+		user.setUsername(registerForm.getUsername());;
+
+		userService.create(user);
 		
 		notifyService.addInfoMessage("Registration is successful. You can login with your account.");
 		return "redirect:/users/login";

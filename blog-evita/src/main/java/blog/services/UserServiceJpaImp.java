@@ -47,18 +47,9 @@ public class UserServiceJpaImp implements UserService{
 	}
 	
 	@Override
-	public User login(String username, String password) {
-		throw new UnsupportedOperationException("Operation not implemented");
+	public User findByUsername(String username) {
+		return this.userRepo.findByUsername(username);
 	}
 	
-	@Override
-	public User register(String username, String password, String fullName) {
-		throw new UnsupportedOperationException("Operation not implemented");
-	}
-	
-	@Override
-	public void setPassword(String username, String newPassword) {
-		throw new UnsupportedOperationException("Operation not implemented");
-	}
 
 }
