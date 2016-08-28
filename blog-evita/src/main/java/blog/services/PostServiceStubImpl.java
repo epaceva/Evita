@@ -27,10 +27,10 @@ public class PostServiceStubImpl implements PostService {
     }
 
     @Override
-    public List<Post> findLatest5() {
+    public List<Post> findByPublicationDate() {
         return this.posts.stream()
         		.sorted((a, b) -> b.getId().compareTo(a.getId()))
-                .sorted((a, b) -> b.getDate().compareTo(a.getDate()))
+                .sorted((a, b) -> b.getPublicationDate().compareTo(a.getPublicationDate()))
                 .limit(5)
                 .collect(Collectors.toList());
     }

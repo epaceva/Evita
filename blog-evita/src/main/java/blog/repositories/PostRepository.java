@@ -10,9 +10,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long>{
-	List<Post>findAllOrderByDateDesc();
 	
-	@Query("SELECT p FROM Post p LEFT JOIN FETCH p.author ORDER BY p.Date DESC")
-	List<Post> findLatest5Posts(Pageable pageabl);
+	@Query("SELECT p FROM Post p LEFT JOIN FETCH p.author ORDER BY p.publicationDate DESC")
+	List<Post> findByPublicationDate(Pageable pageabl);
 
 }

@@ -23,8 +23,8 @@ public class PostServiceJpaImpl implements PostService{
 	}
 
 	@Override
-	public List<Post> findLatest5() {
-		return this.postRepo.findLatest5Posts(new PageRequest(0,5));
+	public List<Post> findByPublicationDate() {
+		return this.postRepo.findByPublicationDate(new PageRequest(0,5));
 	}
 
 	@Override

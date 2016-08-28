@@ -24,8 +24,7 @@ public class Post {
 	private User author;
 	
 	@Column(nullable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date date = new Date();
+	private Date publicationDate = new Date();
 	
 	public Long getId() {
 		return id;
@@ -51,13 +50,14 @@ public class Post {
 	public void setAuthor(User author) {
 		this.author = author;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
 	
+public Date getPublicationDate() {
+	return publicationDate;
+}
+
+public void setPublicationDate(Date publicationData) {
+	this.publicationDate = publicationData;
+}
 	public Post() {
 		
 	}
@@ -76,7 +76,7 @@ public class Post {
 				", title='" + title + '\'' + 
 				", body='" + body + '\'' + 
 				", author=" + author + 
-				", date=" + date + 
+				", date=" + publicationDate + 
 				'}';
 	}
 	

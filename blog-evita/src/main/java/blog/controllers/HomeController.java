@@ -26,7 +26,7 @@ public class HomeController {
 	public String home(Model model){
 		
 		
-		List<Post> latest5Posts = postService.findLatest5();
+		List<Post> latest5Posts = postService.findByPublicationDate();
 		model.addAttribute("latest5posts", latest5Posts);
 		
 		List<Post> latest3Posts = latest5Posts.stream().limit(3).collect(Collectors.toList());
