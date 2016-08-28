@@ -13,6 +13,20 @@
      
      <form method="post" th:object="${registerForm}">
      
+       <label for="firstName">FirstName:</label>
+     	<input type="text" id="firstName" name="firstName" th:value="*{firstName}"/> 
+     	<span class="formError" 
+     		th:if="${#fields.hasErrors('firstName')}" >
+     	</span>
+     	<br />
+     	
+     	 <label for="lastName">LastName:</label>
+     	<input type="text" id="LastName" name="lastName" th:value="*{lastName}"/> 
+     	<span class="formError" 
+     		th:if="${#fields.hasErrors('lastName')}" >
+     	</span>
+     	<br />
+     
      <label for="username">Username:</label>
      	<input type="text" id="username" name="username" th:value="*{username}"/> 
      	<span class="formError" 

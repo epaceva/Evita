@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import blog.forms.LoginForm;
 import blog.forms.RegisterForm;
 import blog.services.DuplicateUser;
+import blog.services.LoginService;
 import blog.services.NotificationService;
 import blog.services.PasswordMatchesValidator;
 import blog.services.RegisterService;
@@ -24,6 +25,9 @@ public class RegisterController {
 	@Autowired
 	private NotificationService notifyService;
 	
+	@Autowired
+	private PasswordMatchesValidator passwordMatchesValidator;
+	
 	@RequestMapping("/users/register")
 	public String register(RegisterForm registerForm) {
 		return "users/register";
@@ -32,15 +36,10 @@ public class RegisterController {
 	@RequestMapping(value = "/users/register", method = RequestMethod.POST)
 	public String showRegisterPage(@Valid RegisterForm registerForm, BindingResult bindingResult, 
 			@Valid PasswordMatchesValidator passwordMatchesValidator,
-			@Valid DuplicateUser duplicateUser,
-			@Valid LoginForm loginForm) {
+			@Valid DuplicateUser duplicateUser)
+			{
 		if (bindingResult.hasErrors()) {
 			notifyService.addErrorMessage("Fill the form correctly");
-			return "users/register";
-		}
-		
-		if (registerService.authenticate(registerForm.getUsername(),registerForm.getPassword(), registerForm.getRepeatPassword())){
-			notifyService.addErrorMessage("Invalid registration");
 			return "users/register";
 		}
 		
@@ -49,10 +48,10 @@ public class RegisterController {
 			return "users/register";
 		}
 		
-		if(duplicateUser.authenticate(loginForm.getUsername(),registerForm.getUsername())) {
-			notifyService.addErrorMessage("User already exist");
-			return "users/register";
-		}
+		//if(duplicateUser.authenticate(loginForm.getUsername(),registerForm.getUsername())) {
+		//	notifyService.addErrorMessage("User already exist");
+		//	return "users/register";
+		//}
 		
 		notifyService.addInfoMessage("Registration is successful");
 		return "users/login";

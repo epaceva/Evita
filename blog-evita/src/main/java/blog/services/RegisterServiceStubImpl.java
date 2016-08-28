@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class RegisterServiceStubImpl implements RegisterService {
 	
 	@Override
-	public boolean authenticate(String username,  String password, String repeatPassword) {
+	public boolean authenticate(String firstName, String lastName, String username,  String password, String repeatPassword) {
 		
 		return Objects.equals( password, repeatPassword);
 	}
