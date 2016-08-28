@@ -1,7 +1,5 @@
 package blog.services;
 
-import java.util.Objects;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,8 +7,7 @@ public class PasswordMatchesValidatorStubImpl implements PasswordMatchesValidato
 
 	@Override
 	public boolean authenticate(String password, String repeatPassword) {
-		
-		return Objects.equals(password, repeatPassword);
+		return password == repeatPassword;
 	}
 
 }

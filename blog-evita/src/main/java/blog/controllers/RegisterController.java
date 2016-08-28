@@ -25,17 +25,13 @@ public class RegisterController {
 	@Autowired
 	private NotificationService notifyService;
 	
-	@Autowired
-	private PasswordMatchesValidator passwordMatchesValidator;
-	
 	@RequestMapping("/users/register")
 	public String register(RegisterForm registerForm) {
 		return "users/register";
 	}
 	
 	@RequestMapping(value = "/users/register", method = RequestMethod.POST)
-	public String showRegisterPage(@Valid RegisterForm registerForm, BindingResult bindingResult, 
-			@Valid PasswordMatchesValidator passwordMatchesValidator,
+	public String showRegisterPage(@Valid RegisterForm registerForm, BindingResult bindingResult,
 			@Valid DuplicateUser duplicateUser)
 			{
 		if (bindingResult.hasErrors()) {
@@ -43,7 +39,7 @@ public class RegisterController {
 			return "users/register";
 		}
 		
-		if (passwordMatchesValidator.authenticate(registerForm.getPassword(), registerForm.getRepeatPassword())){
+		if (!registerForm.getPassword().equals(registerForm.getRepeatPassword())){
 			notifyService.addErrorMessage("Password not match");
 			return "users/register";
 		}
@@ -53,8 +49,8 @@ public class RegisterController {
 		//	return "users/register";
 		//}
 		
-		notifyService.addInfoMessage("Registration is successful");
-		return "users/login";
+		notifyService.addInfoMessage("Registration is successful. You can login with your account.");
+		return "redirect:/users/login";
 	}
 	
 
