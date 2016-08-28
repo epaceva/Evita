@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+    <title>Login</title>
+</head>
+
+<body>
+    <header th:replace="layout :: site-header" />
+      <h1>Welcome to Evita Cross Stitch market</h1>
+     
+     <h2>Please register</h2>
+     
+     <form method="post" th:object="${registerForm}">
+     
+     <label for="username">Username:</label>
+     	<input type="text" id="username" name="username" th:value="*{username}"/> 
+     	<span class="formError" 
+     		th:if="${#fields.hasErrors('username')}" 
+     		th:errors="*{username}">Invalid username</span>
+     	<br />
+     	
+     	<label for="username">Password:</label>
+     	<input type="text" id="password" name="password"/>
+     	<span class="formError" 
+     		th:if="${#fields.hasErrors('password')}" 
+     		th:errors="*{password}">Invalid password</span>
+     	<br />
+     	
+     	<label for="username">Repeat Password:</label>
+     	<input type="text" id="repeatPassword" name="RepeatPassword"/>
+     	<span class="formError" 
+     		th:if="${#fields.hasErrors('repeatPassword')}" 
+     		th:errors="*{repeatPassword}">Invalid password</span>
+     	<br />
+     	
+     	<input type="submit" value="Login"/>
+     </form>
+
+    <footer th:replace="layout :: site-footer" />
+</body>
+
+</html>
