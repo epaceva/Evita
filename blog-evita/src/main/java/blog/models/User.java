@@ -18,8 +18,14 @@ public class User {
 	@Column(length = 60)
 	private String passwordHash;
 	
+	@Column(length = 60)
+	private String repeatPasswordHash;
+	
 	@Column(length = 100)
-	private String fullName;
+	private String firstName;
+	
+	@Column(length = 100)
+	private String lastName;
 	
 	@OneToMany(mappedBy = "author")
 	private Set<Post> posts = new HashSet<>();
@@ -48,12 +54,28 @@ public class User {
 		this.passwordHash = passwordHash;
 	}
 	
-	public String getFullName() {
-		return fullName;
+	public String getRepeatPasswordHash() {
+		return repeatPasswordHash;
 	}
 	
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setRepeatPasswordHash(String repeatPasswordHash) {
+		this.repeatPasswordHash = repeatPasswordHash;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	public Set<Post> getPosts() {
@@ -67,16 +89,18 @@ public class User {
 		
 	}
 	
-	public User(String username, String fullName) {
+	public User(String username, String firstName, String lastName) {
 		this.username = username;
-		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	
-	public User(Long id, String username, String fullName){
+	public User(Long id, String username, String firstName, String lastName){
 		this.id = id;
 		this.username = username;
-		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	
 	@Override
@@ -84,7 +108,8 @@ public class User {
 		return "User{" + "id" + id +
 				", username='" + username + '\'' +
 				", passwordHash='" + passwordHash + '\'' +
-				", fullName='" + fullName + '\'' + '}';
+				", firstName='" + firstName + '\'' + 
+				", lastName='" + lastName + '\'' + '}';
 	}
 }
 

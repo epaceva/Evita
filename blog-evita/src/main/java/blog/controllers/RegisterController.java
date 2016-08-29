@@ -54,6 +54,10 @@ public class RegisterController {
 		User user = new User();
 		user.setId(0L);
 		user.setUsername(registerForm.getUsername());;
+		user.setFirstName(registerForm.getFirstName());
+		user.setLastName(registerForm.getLastName());
+		user.setPasswordHash(registerForm.getPassword());
+		user.setRepeatPasswordHash(registerForm.getRepeatPassword());
 
 		userService.create(user);
 		

@@ -13,9 +13,9 @@ public class PostServiceStubImpl implements PostService {
         add(new Post(1L, "Post 1", "<p>Line #1.</p><p>Line #2</p>", null));
         add(new Post(2L, "Post 2",
                 "Post 2 content:<ul><li>line 1</li><li>line 2</li></p>",
-                new User(10L, "pesho10", "Peter Ivanov")));
+                new User(10L, "pesho10", "Peter" ,"Ivanov")));
         add(new Post(3L, "Post 3", "<p>The post number 3 nice</p>",
-                new User(10L, "merry", null)));
+                new User(10L, "merry", null, null)));
         add(new Post(4L, "Post 4", "<p>Not interesting post</p>", null));
         add(new Post(5L, "Post 5", "<p>Just posting</p>", null));
         add(new Post(6L, "Post 6", "<p>Another interesting post</p>", null));
