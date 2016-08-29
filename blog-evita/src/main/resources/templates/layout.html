@@ -18,17 +18,20 @@
         <a href="index.html" th:href="@{/}"><img
             src="../public/img/ev_logo.gif" th:src="@{/img/ev_logo.gif}" /></a>
         <a href="index.html" th:href="@{/}">Home</a>
-        <a href="users/login.html" th:href="@{/users/login}">Login</a>
-        <a href="users/register.html" th:href="@{/users/register}">Register</a>
-        <a href="posts/index.html" th:href="@{/posts}">Posts</a>
-        <a href="posts/create.html" th:href="@{/posts/create}">Create Post</a>
-        <a href="users/index.html" th:href="@{/users}">Users</a>
-        <div id="logged-in-info">
-            <span>Hello, <b>(user)</b></span>
+        <a href="users/login.html" th:href="@{/users/login}" th:unless="${user}">Login</a>
+        <a href="users/register.html" th:href="@{/users/register}" th:unless="${user}">Register</a>
+        <a href="posts/index.html" th:href="@{/posts}" th:if="${user}">Posts</a>
+        <a href="posts/create.html" th:href="@{/posts/edit}" th:if="${user}">Create Post</a>
+        <a href="users/index.html" th:href="@{/users}" th:if="${user}">Users</a>
+
+
+        <div id="logged-in-info" th:if="${user}">
+            <span>Hello, <b th:text="${user.username}">NaN</b></span>
             <form method="post" th:action="@{/users/logout}">
                 <input type="submit" value="Logout"/>
             </form>
         </div>
+        
     </header>
 
     <ul id="messages" th:with="notifyMessages=${session[T(blog.services

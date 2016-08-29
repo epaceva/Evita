@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+    <title>Create Post</title>
+</head>
+
+<body>
+    <header th:replace="layout :: site-header" />
+      <h1>Welcome to Evita Cross Stitch market</h1>
+   	
+		<form method="post" th:object="${postForm}">
+	     
+	       <label for="title">Title:</label>
+	     	<input type="text" id="title" name="title" th:value="${post.title}"/> 
+	     	<span class="formError" 
+	     		th:if="${#fields.hasErrors('title')}" >
+	     	</span>
+	     	<br />
+	     	
+	     	 <label for="body">Content:</label>
+	     	<input type="text" id="body" name="body" th:value="${post.body}"/> 
+	     	<span class="formError" 
+	     		th:if="${#fields.hasErrors('body')}" >
+	     	</span>
+	     	<br />
+	     	<input type="submit" value="Publish"/>
+	     </form>
+
+    <footer th:replace="layout :: site-footer" />
+</body>
+
+</html>

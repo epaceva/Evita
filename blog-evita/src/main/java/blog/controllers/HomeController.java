@@ -8,13 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import blog.models.Post;
 import blog.services.NotificationService;
 import blog.services.PostService;
-@Controller
 
-public class HomeController {
+@Controller
+@SessionAttributes("user")
+public class HomeController extends BaseController {
 	
 	@Autowired
 	private PostService postService;
@@ -22,8 +24,11 @@ public class HomeController {
 	@Autowired
 	private NotificationService notificationService;
 
+	
+	
 	@RequestMapping("/")
 	public String home(Model model){
+	
 		
 		
 		List<Post> latest5Posts = postService.findByPublicationDate();
@@ -43,7 +48,6 @@ public class HomeController {
 			return "redirect:/";
 		}
 		
-		model.addAttribute("post", post);
 		return "/posts/index";
 		
 	}

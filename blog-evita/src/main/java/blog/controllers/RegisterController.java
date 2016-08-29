@@ -8,14 +8,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import blog.forms.LoginForm;
 import blog.forms.RegisterForm;
 import blog.models.User;
-import blog.services.DuplicateUser;
-import blog.services.LoginService;
 import blog.services.NotificationService;
-import blog.services.PasswordMatchesValidator;
-import blog.services.RegisterService;
 import blog.services.UserService;
 
 @Controller
@@ -33,8 +28,7 @@ public class RegisterController {
 	}
 	
 	@RequestMapping(value = "/users/register", method = RequestMethod.POST)
-	public String showRegisterPage(@Valid RegisterForm registerForm, BindingResult bindingResult,
-			@Valid DuplicateUser duplicateUser)
+	public String showRegisterPage(@Valid RegisterForm registerForm, BindingResult bindingResult)
 			{
 		if (bindingResult.hasErrors()) {
 			notifyService.addErrorMessage("Fill the form correctly");

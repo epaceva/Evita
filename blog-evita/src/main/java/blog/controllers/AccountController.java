@@ -1,24 +1,23 @@
 package blog.controllers;
 
-import java.util.Objects;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import blog.forms.LoginForm;
-import blog.forms.RegisterForm;
 import blog.models.User;
 import blog.services.LoginService;
 import blog.services.NotificationService;
-import blog.services.RegisterService;
 import blog.services.UserService;
 
 @Controller
+@SessionAttributes("user")
 public class AccountController {
 	
 	@Autowired
@@ -36,7 +35,7 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="/users/login", method=RequestMethod.POST)
-	public String showLoginForm(@Valid LoginForm loginForm, BindingResult bindingResult) {
+	public String showLoginForm(@Valid LoginForm loginForm, BindingResult bindingResult, Model model) {
 		
 		if(bindingResult.hasErrors()) {
 			notificationService.addErrorMessage("Please correct username/password");
@@ -54,6 +53,8 @@ public class AccountController {
 			notificationService.addErrorMessage("Please correct username/password");
 			return "users/login";
 		}
+
+		model.addAttribute("user", user);
 		
 		notificationService.addInfoMessage("Successfully login");
 		return "redirect:/";
