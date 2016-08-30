@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import blog.models.Post;
@@ -12,8 +15,8 @@ import blog.repositories.PostRepository;
 
 @Service
 @Primary
-public class PostServiceJpaImpl implements PostService{
-	
+public class PostServiceJpaImpl implements PostService {
+
 	@Autowired
 	private PostRepository postRepo;
 
@@ -24,7 +27,17 @@ public class PostServiceJpaImpl implements PostService{
 
 	@Override
 	public List<Post> findByPublicationDate() {
-		return this.postRepo.findByPublicationDate(new PageRequest(0,5));
+		return this.postRepo.findByPublicationDate(new PageRequest(0, 5));
+	}
+
+	public Page<Post> getPosts(Integer page, Integer size) {
+		PageRequest request = new PageRequest(page, size, Sort.Direction.DESC, "publicationDate");
+		return postRepo.findAll(request);
+	}
+
+	@Override
+	public Page<Post> getPosts(Pageable pageable) {
+		return postRepo.findAll(pageable);
 	}
 
 	@Override
@@ -45,8 +58,7 @@ public class PostServiceJpaImpl implements PostService{
 	@Override
 	public void deleteById(Long id) {
 		this.postRepo.delete(id);
-		
+
 	}
-	
 
 }

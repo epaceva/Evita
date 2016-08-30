@@ -2,6 +2,11 @@ package blog.services;
 
 import blog.models.Post;
 import blog.models.User;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -72,4 +77,17 @@ public class PostServiceStubImpl implements PostService {
         }
         throw new RuntimeException("Post not found: " + id);
     }
+
+    
+	public Page<Post> getPosts(Integer page, Integer size) {
+        PageRequest request = new PageRequest(page - 1, size, Sort.Direction.DESC, "publicationDate");
+        return null;
+	}
+	
+	@Override
+	public Page<Post> getPosts(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

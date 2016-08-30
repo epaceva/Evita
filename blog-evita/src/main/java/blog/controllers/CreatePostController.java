@@ -2,7 +2,6 @@ package blog.controllers;
 
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;

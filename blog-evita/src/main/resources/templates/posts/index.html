@@ -2,28 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout :: site-head">
-    <title th:text="${post.title}">Details</title>
+    <title>Posts</title>
 </head>
 
 <body>
     <header th:replace="layout :: site-header" />
       <h1>Welcome to Evita Cross Stitch market</h1>
-   	
- <main id="posts">
-        <article>
-            <h2 class="title" th:text="${post.title}">Post Title</h2>
-            <div class="date">
-                <i>Posted on</i>
-                <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">22-May-2016</span>
-                <span th:if="${post.author}" th:remove="tag">
-                    <i>by</i> <span th:text="${post.author.fullName != null ?
-                        post.author.fullName : post.author.username}">Evelina Paceva</span>
-                </span>
-            </div>
-            <p class="content" th:utext="${post.body}">Post content</p>
-        </article>
-    </main>
 
+	<div th:if="${not #lists.isEmpty(posts)}">
+        <h2>Product List</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+            </tr>
+            <tr th:each="post : ${posts}">
+                <td th:text="${post.id}"><a href="/post/${post.id}">Id</a></td>
+                <td th:text="${post.title}">title</td>
+                <td th:text="${post.body}">content</td>
+                <td><a th:href="${'/product/' + post.id}">View</a></td>
+                <td><a th:href="${'/product/edit/' + post.id}">Edit</a></td>
+                <td><a th:href="${'/product/delete/' + post.id}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+    
+     <div th:fragment='paginationbar'>
+        <div>
+            <ul class='pagination pagination-centered'>
+                <li th:class="${page.firstPage}?'disabled':''">
+                <span th:if='${page.firstPage}'>← First</span>
+                <a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>← First</a>
+                </li>
+                <li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+                <span th:if='${not page.hasPreviousPage}'>«</span>
+                <a th:if='${page.hasPreviousPage}' th:href='@{${page.url}(page=${page.number-2},size=${page.size})}' title='Go to previous page'>«</a>
+                </li>
+                <li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
+                <span th:if='${item.current}' th:text='${item.number}'>1</span>
+                <a th:if='${not item.current}' th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'><span th:text='${item.number}'>1</span></a>
+                </li>
+                <li th:class="${page.hasNextPage}? '' : 'disabled'">
+                <span th:if='${not page.hasNextPage}'>»</span>
+                <a th:if='${page.hasNextPage}' th:href='@{${page.url}(page=${page.number},size=${page.size})}' title='Go to next page'>»</a>
+                </li>
+                <li th:class="${page.lastPage}? 'disabled' : ''">
+                <span th:if='${page.lastPage}'>Last →</span>
+                <a th:if='${not page.lastPage}' th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Last →</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+   	   	
     <footer th:replace="layout :: site-footer" />
 </body>
 
