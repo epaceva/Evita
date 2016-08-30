@@ -20,8 +20,8 @@
         <a href="index.html" th:href="@{/}">Home</a>
         <a href="users/login.html" th:href="@{/users/login}" th:unless="${user}">Login</a>
         <a href="users/register.html" th:href="@{/users/register}" th:unless="${user}">Register</a>
-        <a href="posts/index.html" th:href="@{/posts}" th:if="${user}">Posts</a>
-        <a href="posts/create.html" th:href="@{/posts/edit}" th:if="${user}">Create Post</a>
+        <a href="post/index.html" th:href="@{/post}" th:if="${user}">Posts</a>
+        <a href="post/create.html" th:href="@{/post/edit}" th:if="${user}">Create Post</a>
         <a href="users/index.html" th:href="@{/users}" th:if="${user}">Users</a>
 
 

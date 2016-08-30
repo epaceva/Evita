@@ -9,6 +9,8 @@
     <header th:replace="layout :: site-header" />
       <h1>Welcome to Evita Cross Stitch market</h1>
 
+	<a th:href="${'/post/new'}">New</a>
+
 	<div th:if="${not #lists.isEmpty(posts)}">
         <h2>Product List</h2>
         <table class="table table-striped">
@@ -20,9 +22,9 @@
                 <td th:text="${post.id}"><a href="/post/${post.id}">Id</a></td>
                 <td th:text="${post.title}">title</td>
                 <td th:text="${post.body}">content</td>
-                <td><a th:href="${'/product/' + post.id}">View</a></td>
-                <td><a th:href="${'/product/edit/' + post.id}">Edit</a></td>
-                <td><a th:href="${'/product/delete/' + post.id}">Delete</a></td>
+                <td><a th:href="${'/post/' + post.id}">View</a></td>
+                <td><a th:href="${'/post/edit/' + post.id}">Edit</a></td>
+                <td><a th:href="${'/post/delete/' + post.id}">Delete</a></td>
             </tr>
         </table>
     </div>
