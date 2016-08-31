@@ -44,6 +44,10 @@ div.site-recent {
 	text-align: center;
 }
 
+div.date {
+	margin-bottom: 10px;
+}
+
 ul#messages li {
     display: block;
     width: 80%;
