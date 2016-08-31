@@ -33,7 +33,7 @@ public class PostServiceJpaImpl implements PostService {
 
 	@Override
 	public Page<Post> findByAuthor(User user, Pageable pageable) {
-		return postRepo.findByAuthor(user, pageable);
+		return postRepo.findByAuthorOrderByPublicationDateDesc(user, pageable);
 	}
 	
 	public Page<Post> getPosts(Integer page, Integer size) {
@@ -43,7 +43,7 @@ public class PostServiceJpaImpl implements PostService {
 
 	@Override
 	public Page<Post> getPosts(Pageable pageable) {
-		return postRepo.findAll(pageable);
+		return postRepo.findAllByOrderByPublicationDateDesc(pageable);
 	}
 
 	@Override

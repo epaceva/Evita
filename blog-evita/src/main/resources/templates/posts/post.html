@@ -2,15 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout :: site-head">
-    <title>Posts</title>
+<title>Posts</title>
 </head>
 
 <body>
-    <header th:replace="layout :: site-header" />
-      <h1 th:text="${post.title}">Title</h1>
-   	  <div th:text="${post.body}">
-   	  </div>
-    <footer th:replace="layout :: site-footer" />
+
+	<div th:replace="layout :: menu" />
+	<header th:replace="layout :: site-header" />
+
+	<div class="container">
+		<header th:replace="layout :: site-message" />
+
+		<div class="row">
+		
+			<div class="col-sm-8 blog-main">
+				<h1 th:text="${post.title}">Title</h1>
+				<div th:utext="${post.body}"></div>
+			</div>
+			
+			<aside class="col-sm-3 col-sm-offset-1">
+				<div th:replace="layout :: site-recent" />
+			</aside>
+
+		</div> <!--/* class="container"  */-->
+	</div>
+
+	<footer th:replace="layout :: site-footer" />
+	
 </body>
 
 </html>

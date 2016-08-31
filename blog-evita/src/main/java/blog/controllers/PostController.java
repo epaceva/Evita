@@ -73,6 +73,8 @@ public class PostController {
 	public String get(@PathVariable Long id, Model model) {
 		Post post = postService.findById(id);
 		
+		model.addAttribute("lastPosts", postService.getPosts(0,  5).getContent());
+		
 		if (post == null)
 			return "/posts/not-found";
 		model.addAttribute("post", postService.findById(id));
@@ -85,20 +87,18 @@ public class PostController {
 		
 		Post post = new Post();
 		post.setId(0L);
-
 		User user = (User) model.asMap().get("user");
 		post.setAuthor(user);
-		post.setPublicationDate(new Date());
-		
+		post.setPublicationDate(new Date());		
 		model.addAttribute("post", post);
 		
-        return "redirect:/posts/edit";		
+        return "/posts/edit";		
 	}    
 
-    @RequestMapping("post/edit/{id}")
+    @RequestMapping(value = { "post/edit/{id}", "post/edit/"})
     public String edit(@PathVariable Long id, Model model){
 		if (!model.containsAttribute("user")) return "redirect:/user/login";
-		
+
 		Post post = postService.findById(id);
 		model.addAttribute("post", post);
 		
@@ -121,19 +121,19 @@ public class PostController {
 			notificationService.addErrorMessage("Body should be more than 3 chars.");
 			return "posts/edit";			
 		}
-		if (post.getBody().length() > 1024) {
-			notificationService.addErrorMessage("Body should be less than 1024 chars.");
+		if (post.getBody().length() > 20971520) {
+			notificationService.addErrorMessage("Body should be less than 20971520 (20MB) chars.");
 			return "posts/edit";
 		}
-
+		
 		System.out.println(post);
 		
 		if (post.getId() != null && post.getId() != 0) {
-			postService.edit(post);
+			post = postService.edit(post);
 		} else {
 			post.setAuthor((User) model.asMap().get("user"));			
 			post.setPublicationDate(new Date());
-			postService.create(post);
+			post = postService.create(post);
 		}
 		
 		notificationService.addInfoMessage("Post created successfully");

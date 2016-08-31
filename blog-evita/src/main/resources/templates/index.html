@@ -12,25 +12,25 @@
 	<div class="container">
 		<header th:replace="layout :: site-message" />
 
-		<aside>
-			<h2>Resent Posts</h2>
-			<a href="#" th:each="p : ${latest5posts}" th:text="${p.title}" th:href="@{/posts/view/{id}/(id=${p.id})}">Last</a>
-		</aside>
-
 		<main id="posts">
-		<article th:each="p : ${latest3posts}">
-			<h2 class="title" th:text="${p.title}">Post Title</h2>
-			<div class="date">
-				<i>Posted on</i> <span
-					th:text="${#dates.format(p.publicationDate, 'dd-MMM-yyyy')}">22-May-2016</span>
-				<span th:if="${p.author}" th:remove="tag"> <i>by</i> <span
-					th:text="${p.author.FirstName != null ?
-                        p.author.FirstName : p.author.username}">Evelina
-						Paceva</span>
-				</span>
+		
+			<article th:each="p : ${posts}" class="panel panel-default">
+			<div class="panel-body">		
+				<h2 class="title"><a th:href="${'/post/' + p.id}" th:text="${p.title}"></a></h2>
+
+				<div class="date">
+					<i>Posted on</i> 
+					<span th:text="${#dates.format(p.publicationDate, 'dd-MMM-yyyy')}">22-May-2016</span>
+					<span th:text="${p.author.FirstName}">NaN Author</span> <span th:text="${p.author.lastName}">NaN Author</span>
+				</div>
+				<div class="content" th:utext="${p.body}">
+					Post content
+				</div>
 			</div>
-			<p class="content" th:utext="${p.body}">Post content</p>
-		</article>
+			</article>
+			
+		<div th:replace="layout :: paginationbar" />	
+			
 		</main>
 
 	</div>

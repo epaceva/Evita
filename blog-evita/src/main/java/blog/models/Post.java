@@ -13,11 +13,11 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false, length = 300)
+	@Column(nullable = false, length = 500)
 	private String title;
 	
 	@Lob
-	@Column(nullable = false)
+	@Column(nullable = false, length = 20971520)
 	private String body; 
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)

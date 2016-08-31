@@ -17,8 +17,10 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 	@Query("SELECT p FROM Post p LEFT JOIN FETCH p.author ORDER BY p.publicationDate DESC")
 	List<Post> findByPublicationDate(Pageable pageabl);
 
+    Page<Post> findAllByOrderByPublicationDateDesc(Pageable pageable);
+	
     Page<Post> findAll(Pageable pageable);
 
-    Page<Post> findByAuthor(User user, Pageable pageable);
+    Page<Post> findByAuthorOrderByPublicationDateDesc(User user, Pageable pageable);
 
 }

@@ -33,7 +33,7 @@
 						<li th:unless="${user}"><a href="users/login.html" th:href="@{/user/login}" >Login</a></li>
 						<li th:unless="${user}"><a href="users/register.html" th:href="@{/user/register}">Register</a></li>
 						<li th:if="${user}"><a href="post/index.html" th:href="@{/post}" >Posts</a></li>
-						<li th:if="${user}"><a href="users/index.html" th:href="@{/user}">Users</a></li>
+<!-- 						<li th:if="${user}"><a href="users/index.html" th:href="@{/user}">Users</a></li> -->
 					</ul>
 				
 					<form class="navbar-form navbar-right" th:if="${user}" method="post" th:action="@{/user/logout}">
@@ -61,6 +61,41 @@
 		</ul>
 	</header>
 
+	<div th:fragment="site-recent" class="panel panel-default">
+		<div class="panel-heading">Resent Posts</div>
+		<div class="panel-body site-recent" th:each="p : ${lastPosts}">
+			<a href="#" th:text="${p.title}" th:href="@{/post/{id}/(id=${p.id})}">Last</a>
+		</div>
+	</div>
+		
+			<div th:fragment="paginationbar">
+			<div>
+				<ul class='pagination pagination-centered'>
+					<li th:class="${page.firstPage}?'disabled':''">
+						<span th:if='${page.firstPage}'>First</span> 
+						<a th:if='${not page.firstPage}' th:href='@{${page.url}(page=0,size=${page.size})}'>&lt; First</a>
+					</li>
+					<li th:class="${page.hasPreviousPage}? '' : 'disabled'">
+						<span th:if='${not page.hasPreviousPage}'>&laquo;</span> 
+						<a th:if='${page.hasPreviousPage}' th:href='@{${page.url}(page=${page.number-2},size=${page.size})}' title='Go to previous page'>&laquo;</a>
+					</li>
+					<li th:each='item : ${page.items}' th:class="${item.current}? 'active' : ''">
+						<span th:if='${item.current}' th:text='${item.number}'>1</span> 
+						<a th:if='${not item.current}' th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'>
+						<span th:text='${item.number}'>1</span></a>
+					</li>
+					<li th:class="${page.hasNextPage}? '' : 'disabled'">
+						<span th:if='${not page.hasNextPage}'>&raquo;</span> 
+						<a th:if='${page.hasNextPage}' th:href='@{${page.url}(page=${page.number},size=${page.size})}' title='Go to next page'>&raquo;</a>
+					</li>
+					<li th:class="${page.lastPage}? 'disabled' : ''">
+						<span th:if='${page.lastPage}'>Last</span>
+						<a th:if='${not page.lastPage}' th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>Last &gt;</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	
 	<footer th:fragment="site-footer" class="container"> &copy; Evita Company, 2016 </footer>
 </body>
 
