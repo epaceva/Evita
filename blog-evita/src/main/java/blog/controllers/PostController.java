@@ -81,14 +81,9 @@ public class PostController {
     }
 
 	@RequestMapping(value = "/post", method = RequestMethod.POST)
-	public String save(Post post, BindingResult bindingResult, Model model) {
+	public String save(Post post, Model model) {
 		if (!model.containsAttribute("user")) return "redirect:/users/login";
-		
-		if (bindingResult.hasErrors()) {
-			notificationService.addErrorMessage("Fill the form correctly");
-			return "posts/edit";
-		}
-		
+				
 		if (post.getTitle() == null || post.getTitle().trim().length() < 3) {
 			notificationService.addErrorMessage("Title should be more than 3 chars.");
 			return "posts/edit";			

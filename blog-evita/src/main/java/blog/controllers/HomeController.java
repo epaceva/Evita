@@ -18,15 +18,13 @@ import blog.services.PostService;
 
 @Controller
 @SessionAttributes("user")
-public class HomeController extends BaseController {
+public class HomeController {
 	
 	@Autowired
 	private PostService postService;
 	
 	@Autowired
-	private NotificationService notificationService;
-
-	
+	private NotificationService notificationService;	
 	
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public ModelAndView get(Model model, Pageable pageable) {
