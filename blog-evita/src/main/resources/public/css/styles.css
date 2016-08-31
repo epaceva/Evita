@@ -7,7 +7,7 @@ body {
 }
 
 h1, .h1,
-h2, .h2,
+h2, .h2 ,
 h3, .h3,
 h4, .h4,
 h5, .h5,
@@ -33,58 +33,15 @@ div.site-recent {
 	border-bottom: 1px dotted rgb(221, 221, 221);
 }
 
-body>header {
-    background: #eee;
-    padding: 5px;
+.site-header {
+	margin-bottom: 20px;
 }
 
-body>header>a>img, body>header a  {
-    display: inline-block;
-    vertical-align: middle;
-    padding: 0px 5px;
-    font-size: 1.2em;
-}
-
-body>footer {
-    background: #eee;
-    padding: 5px;
-    margin: 10px 0;
-    text-align: center;
-}
-
-#logged-in-info {
-    float: right;
-    margin-top: 18px;
-}
-
-#logged-in-info form {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-body>aside {
-    float: right;
-    width: 200px;
-    background: #CCC;
-    padding: 15px;
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
-body>aside h2 {
-    margin: 5px 0px 15px 0px;
-}
-
-body>aside a {
-    display: block;
-    margin: 5px 0px;
-    text-decoration: none;
-}
-
-body>main:after {
-    content: '';
-    display: block;
-    clear: both;
+.site-footer {
+	margin-top: 20px;
+	background-color: #eee;
+	padding: 20px;
+	text-align: center;
 }
 
 ul#messages li {
@@ -110,9 +67,3 @@ ul#messages li.error {
 	font-style: italic;
 	fondt-size: 0.9em;
 }
-
-
-
-
-
-

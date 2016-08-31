@@ -11,8 +11,12 @@
 	<header th:replace="layout :: site-header" />
 
 	<div class="container">
-		<a th:href="${'/post/new'}">New</a>
-
+	
+		<h2>Your Posts</h2>
+	
+		<div><a th:href="${'/post/new'}">New Post</a></div>
+		<br /><br />
+		
 		<div th:if="${not #lists.isEmpty(posts)}">
 			<table class="table table-striped">
 				<tr>

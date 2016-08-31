@@ -24,7 +24,10 @@
       				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         				<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
       				</button>
-      				<a class="navbar-brand" href="/" th:href="@{/}">Evitta</a>
+      				<a class="navbar-brand" href="/" th:href="@{/}">
+      					<span><img th:src="@{/img/favicon.ico}" /></span>
+      					Evitta
+      				</a>
     			</div>	
 			
 				<div class="collapse navbar-collapse">
@@ -48,7 +51,7 @@
 	</div>
 
 	<header class="container" th:fragment="site-header">
-			<div class="jumbotron">
+			<div class="jumbotron site-header">
 				<div class="pull-left"><img src="../public/img/ev_logo.gif" th:src="@{/img/ev_logo.gif}" /></div>
 		     	<h1>Evita Cross Stitch market</h1>
 			</div>
@@ -96,7 +99,7 @@
 			</div>
 		</div>
 	
-	<footer th:fragment="site-footer" class="container"> &copy; Evita Company, 2016 </footer>
+	<footer th:fragment="site-footer" class="container site-footer"> &copy; Evita Company, 2016 </footer>
 </body>
 
 </html>
