@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import blog.models.Post;
+import blog.models.User;
 import blog.repositories.PostRepository;
 
 @Service
@@ -30,6 +31,11 @@ public class PostServiceJpaImpl implements PostService {
 		return this.postRepo.findByPublicationDate(new PageRequest(0, 5));
 	}
 
+	@Override
+	public Page<Post> findByAuthor(User user, Pageable pageable) {
+		return postRepo.findByAuthor(user, pageable);
+	}
+	
 	public Page<Post> getPosts(Integer page, Integer size) {
 		PageRequest request = new PageRequest(page, size, Sort.Direction.DESC, "publicationDate");
 		return postRepo.findAll(request);

@@ -1,6 +1,5 @@
 package blog.controllers;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import blog.PageWrapper;
 import blog.forms.LoginForm;
+import blog.forms.RegisterForm;
 import blog.models.User;
 import blog.services.NotificationService;
 import blog.services.UserService;
@@ -67,6 +67,43 @@ public class UserController {
 		notificationService.addInfoMessage("Successfully login");
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value = "/user/register", method = RequestMethod.GET)
+	public String getRegister(RegisterForm registerForm) {
+		return "users/register";
+	}
+	
+	@RequestMapping(value = "/user/register", method = RequestMethod.POST)
+	public String showRegisterPage(@Valid RegisterForm registerForm, BindingResult bindingResult)
+			{
+		if (bindingResult.hasErrors()) {
+			notificationService.addErrorMessage("Fill the form correctly");
+			return "users/register";
+		}
+		
+		if (!registerForm.getPassword().equals(registerForm.getRepeatPassword())){
+			notificationService.addErrorMessage("Password not match");
+			return "users/register";
+		}
+		
+		if (null != userService.findByUsername(registerForm.getUsername())) {
+			notificationService.addErrorMessage("User already exist");
+			return "users/register";
+		}
+		
+		User user = new User();
+		user.setId(0L);
+		user.setUsername(registerForm.getUsername());;
+		user.setFirstName(registerForm.getFirstName());
+		user.setLastName(registerForm.getLastName());
+		user.setPasswordHash(registerForm.getPassword());
+		user.setRepeatPasswordHash(registerForm.getRepeatPassword());
+
+		userService.create(user);
+		
+		notificationService.addInfoMessage("Registration is successful. You can login with your account.");
+		return "redirect:/user/login";
+	}	
 	
 	@RequestMapping(value = { "/user" }, method = RequestMethod.GET)
 	public ModelAndView get(Model model, Pageable pageable) {

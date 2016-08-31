@@ -26,6 +26,17 @@ public class Post {
 	@Column(nullable = false)
 	private Date publicationDate = new Date();
 	
+	public Post() {
+		
+	}
+	
+	public Post(Long id, String title, String body, User author){
+		this.id = id;
+		this.title = title;
+		this.body = body;
+		this.author = author;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -51,24 +62,14 @@ public class Post {
 		this.author = author;
 	}
 	
-public Date getPublicationDate() {
-	return publicationDate;
-}
+	public Date getPublicationDate() {
+		return publicationDate;
+	}
 
-public void setPublicationDate(Date publicationData) {
-	this.publicationDate = publicationData;
-}
-	public Post() {
+	public void setPublicationDate(Date publicationData) {
+		this.publicationDate = publicationData;
+	}
 		
-	}
-	
-	public Post(Long id, String title, String body, User author){
-		this.id = id;
-		this.title = title;
-		this.body = body;
-		this.author = author;
-	}
-	
 	@Override
 	public String toString() {
 		return "Post{" +

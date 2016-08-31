@@ -3,17 +3,13 @@ package blog.forms;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 public class RegisterForm {
 	
 	@NotNull
-   // @NotEmpty
     @Size(min = 2, max = 30, message = "Please enter your First Name")
     private String firstName;
      
     @NotNull
-    //@NotEmpty
     @Size(min = 2, max = 30, message = "Please enter your Last Name")
     private String lastName;
 

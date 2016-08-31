@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import blog.models.Post;
+import blog.models.User;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,5 +18,7 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 	List<Post> findByPublicationDate(Pageable pageabl);
 
     Page<Post> findAll(Pageable pageable);
+
+    Page<Post> findByAuthor(User user, Pageable pageable);
 
 }

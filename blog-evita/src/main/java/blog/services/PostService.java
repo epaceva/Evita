@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import blog.models.Post;
+import blog.models.User;
 
 
 public interface PostService {
@@ -18,5 +19,6 @@ public interface PostService {
 
 	Page<Post> getPosts(Integer page, Integer size);
 	Page<Post> getPosts(Pageable pageable);
+    Page<Post> findByAuthor(User user, Pageable pageable);
 
 }
