@@ -1,4 +1,4 @@
-package blog.controllers;
+package blog;
 
 import java.util.ArrayList;
 import java.util.List;

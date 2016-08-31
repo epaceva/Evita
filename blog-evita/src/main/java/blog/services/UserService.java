@@ -2,6 +2,9 @@ package blog.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import blog.models.User;
 
 public interface UserService {
@@ -13,6 +16,7 @@ public interface UserService {
 	
 	boolean authenticate(String username, String password);
 	User findByUsername(String username);
-	
+	Page<User> getUsers(Pageable pageable);
+
 	
 }

@@ -2,10 +2,10 @@ package blog.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import blog.models.User;
@@ -50,9 +50,12 @@ public class UserServiceJpaImp implements UserService{
 	
 	@Override
 	public User findByUsername(String username) {
-		return this.userRepo.findByUsername(username);
+		return userRepo.findByUsername(username);
 	}
 	
-	
+	@Override
+	public Page<User> getUsers(Pageable pageable) {
+		return userRepo.findAll(pageable);
+	}
 
 }
