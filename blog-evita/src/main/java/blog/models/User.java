@@ -27,15 +27,46 @@ public class User {
 	@Column(length = 100)
 	private String lastName;
 	
+	@Column()
+	private boolean isAdmin = false;
+	
 	@OneToMany(mappedBy = "author")
 	private Set<Post> posts = new HashSet<>();
+
+	public User() {
+		isAdmin = false;
+	}
 	
+	public User(String username, String firstName, String lastName) {
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		isAdmin = false;
+	}
+
+	
+	public User(Long id, String username, String firstName, String lastName){
+		this.id = id;
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		isAdmin = false;		
+	}
+
 	public Long getId() {
 		return id;
 	}
 	
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 	
 	public String getUsername() {
@@ -84,23 +115,6 @@ public class User {
 	
 	public void setPosts(Set<Post> posts) {
 		this.posts = posts;
-	}
-	public User(){
-		
-	}
-	
-	public User(String username, String firstName, String lastName) {
-		this.username = username;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-
-	
-	public User(Long id, String username, String firstName, String lastName){
-		this.id = id;
-		this.username = username;
-		this.firstName = firstName;
-		this.lastName = lastName;
 	}
 	
 	@Override
